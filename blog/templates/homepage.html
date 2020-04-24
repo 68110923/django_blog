@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+</head>
+<body align="center">
+{% csrf_token %}
+<h1>主页</h1>
+<table class="table" >
+    <h3>{{ msg }}</h3>
+
+<li><a href="/user/post">注册</a></li>
+<li><a href="/user/get">登录</a></li>
+<li><a href="/user/put">个人信息</a></li>
+<li><a href="/article/post">发布文章</a></li>
+
+</table>
+<div>
+    {% for article in articleall %}
+    <div>
+    <li>标题：{{ article.articleTitle }}----作者：{{ article.User_id.userid }}----发布时间：{{ article.created_time }}</li>
+    <li>文章内容：{{ article.articleContent }}</li>
+        评论区：
+        {% for comment in commentall %}
+            {% if comment.articleId.id == article.id %}
+                <li>评论人：{{ comment.userId.userid }}----评论内容：{{ comment.commentContent }}----评论时间：{{ comment.created_time }}</li>
+            {% endif %}
+        {% endfor %}
+    <form action="/comment/articleID={{ article.id }}" method="post">
+        {% csrf_token %}
+        <div>我要评论:<input name="comment"></div>
+        <div><button type="submit">评论</button></div>
+    </form>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<body align="center">
+<h3>{{ msg }}</h3>
+{% csrf_token %}
+<form action="/user/" method="get">
+    <li>用户名：<input name="userid"></li>
+    <li>密码：<input name="pwd"></li>
+    <li><button type="submit" class="button">登录</button> </li>
+</form>
+
+</body>
+</html>
